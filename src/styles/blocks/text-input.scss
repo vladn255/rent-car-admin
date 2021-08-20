@@ -1,0 +1,37 @@
+.text-input {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 15px;
+}
+
+.text-input__input {
+  font-size: 11px;
+  line-height: 13px;
+
+  background: #ffffff;
+  border: 0.5px solid #becad6;
+  border-radius: 3px;
+  padding: 8px 12px;
+}
+
+.text-input__label {
+  font-size: 11px;
+  line-height: 12px;
+  margin-bottom: 8px;
+}
+
+.text-input__error-text {
+  font-size: 10px;
+  line-height: 11px;
+  color: $error-red;
+
+  margin-left: 11px;
+  margin-top: 4px;
+}
+
+.text-input__input--error {
+  border: 0.5px solid $error-red;
+  box-shadow: 0px 2.5px 5.5px $error-border-red;
+  border-radius: 4px;
+}
