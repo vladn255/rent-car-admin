@@ -3,7 +3,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles"
 
 const useContainerStyles = makeStyles(() => createStyles({
     root: {
-        marginTop: "20%",
+        marginTop: "20vh",
         padding: "0"
     },
     maxWidthLg: {
