@@ -1,5 +1,5 @@
 import { Formik } from "formik"
-import React, { useEffect } from "react"
+import React from "react"
 import * as yup from 'yup'
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router"
@@ -41,10 +41,6 @@ const LoginForm: React.FC = () => {
     const dispatch = useDispatch();
     const loadingErrorStatus = useSelector((state: RootState) => state.auth.loadingError)
     const authorizationStatus = useSelector((state: RootState) => state.auth.authorized)
-
-    useEffect(() => {
-        // do nothing
-    }, [loadingErrorStatus, authorizationStatus])
 
     const initialValues: ILoginFormValues = {
         email: '',
