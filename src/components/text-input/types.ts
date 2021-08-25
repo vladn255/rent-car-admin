@@ -8,7 +8,7 @@ interface ITextInputProps {
     value?: string,
     auotofocus?: boolean,
 
-    isError: string | false | undefined,
+    isError: string | false,
     errorText?: string,
     changeHandler: (evt: React.ChangeEvent<HTMLInputElement>) => void,
     blurHandler: (evt: React.FocusEvent<HTMLInputElement>) => void
