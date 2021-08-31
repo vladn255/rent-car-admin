@@ -6,7 +6,7 @@ interface IGeneralState {
 }
 
 const initialState: IGeneralState = {
-    selectedTab: SideBarItemsNames.CARS_LIST
+    selectedTab: SideBarItemsNames.ORDERS
 }
 
 const generalSlice = createSlice({

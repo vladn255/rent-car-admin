@@ -8,7 +8,6 @@ import { SideBarItemsNames } from '../../globals/const';
 import { useSelector } from 'react-redux';
 
 const setTable = (tabName: string) => {
-    console.log('setTable', tabName)
     switch (tabName) {
         case (SideBarItemsNames.ORDERS):
             return <OrdersTable />
@@ -26,7 +25,6 @@ const MainContent: React.FC = () => {
     const { content, typographyBody1, paperRoot } = useStyles();
 
     const activeTab = useSelector((state: RootState) => state.general.selectedTab)
-    console.log('main content', activeTab)
 
     return (
         <main className={content}>

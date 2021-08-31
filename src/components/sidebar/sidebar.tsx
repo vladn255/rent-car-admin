@@ -9,7 +9,8 @@ import { useStyles } from './styles';
 import { setSelectedTab } from '../../store/slices/general/general';
 
 import LogoTitle from '../logo-title/logo-title';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 
 const LogoProps = {
     FONT_SIZE: 16,
@@ -44,14 +45,13 @@ const SidebarItems = [
 const Sidebar: React.FC = () => {
     const dispatch = useDispatch()
     const { root, toolbar, itemRoot, selected, iconRoot } = useStyles()
-    const [activeTab, setActiveTab] = useState(SideBarItemsNames.CAR_CARD)
+    const [activeTab, setActiveTab] = useState(useSelector((state: RootState) => state.general.selectedTab))
 
     const clickHandler = (evt: React.SyntheticEvent, index: number) => {
         evt.preventDefault()
         const selectedTab = SidebarItems.find((item) => item.index === index)
 
         if (typeof selectedTab === 'object') {
-            console.log('sidebar select', selectedTab.name)
             setActiveTab(selectedTab.name)
             dispatch(setSelectedTab(selectedTab.name))
         }

@@ -3,13 +3,13 @@ import { Select } from './styles'
 import { ISelectInput } from './types'
 
 
-const SelectInput: React.FC<ISelectInput> = ({ name, options, callback }) => {
+const SelectInput: React.FC<ISelectInput> = ({ name, value, options, callback }) => {
     const changeHandler = (evt: ChangeEvent<HTMLSelectElement>) => {
         callback(name, evt.target.value)
     }
 
     return (
-        <Select name={name} onChange={changeHandler}>
+        <Select name={name} onChange={changeHandler} value={value}>
             {options.map((option, id) => <option key={id} value={option.value} data-name={option.value}>{option.text}</option>)}
         </Select>
     )

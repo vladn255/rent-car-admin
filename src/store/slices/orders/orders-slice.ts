@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { IUrlProps } from "../../../globals/types"
-import { IOrderState, IResponse, TParsedSelectors, TFilterData } from "./types";
+import { IOrderState, IResponse, TParsedSelectors, TFilterData, TFormData } from "./types";
 
 import { fetchOrders, fetchCities, fetchCars, fetchStatuses } from "./api-actions";
 
@@ -44,6 +44,7 @@ const initialState: IOrderState = {
 
     page: 1,
     filters: [],
+    formData: [],
 
     citySelects: [],
     carSelects: [],
@@ -56,6 +57,7 @@ const ordersSlice = createSlice({
     reducers: {
         setCurrentPage(state, action: PayloadAction<number>) { state.page = action.payload },
         setCurrentFilters(state, action: PayloadAction<TFilterData>) { state.filters = action.payload },
+        setOrdersFormData(state, action: PayloadAction<TFormData>) { state.formData = action.payload },
     },
     extraReducers: (builder) => {
         builder.addCase(getOrders.fulfilled, (state, action) => {
@@ -90,5 +92,5 @@ const ordersSlice = createSlice({
 })
 
 export default ordersSlice.reducer
-export const { setCurrentPage, setCurrentFilters } = ordersSlice.actions
+export const { setCurrentPage, setCurrentFilters, setOrdersFormData } = ordersSlice.actions
 export { getOrders, getCitySelects, getCarSelects, getStatusSelects }

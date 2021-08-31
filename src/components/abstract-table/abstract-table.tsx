@@ -4,7 +4,7 @@ import { Divider } from '@material-ui/core'
 import { setCurrentFilters, setCurrentPage } from "../../store/slices/orders/orders-slice"
 
 import SelectForm from '../select-form/select-form';
-import TableOrders from '../table-element/table-element';
+import TableElement from '../table-element/table-element';
 import PaginationBar from '../pagination-bar/pagination-bar';
 
 import { TFilterData, ITableProps } from './types'
@@ -34,6 +34,7 @@ const AbstractTable: React.FC<ITableProps> = ({
     const pageCount = (Math.floor(dataCount / limit))
 
     const getFilteredData = (data: TFilterData) => {
+
         const queryReadyData = data.map((filter) => {
             return {
                 name: `${filter.name}${querySelector}`,
@@ -51,7 +52,7 @@ const AbstractTable: React.FC<ITableProps> = ({
                 : <>
                     <SelectForm submitCallback={getFilteredData} selectInputData={selectData} />
                     <Divider />
-                    <TableOrders dataList={dataList} getTable={getTableCallback} />
+                    <TableElement dataList={dataList} getTable={getTableCallback} />
                     <Divider />
                     <PaginationBar count={pageCount} page={page} callback={setPageHandler} />
                 </>

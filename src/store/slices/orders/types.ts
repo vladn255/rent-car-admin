@@ -4,6 +4,7 @@ interface IOrderState {
     loadingError: boolean,
     page: number,
     filters: TFilterData,
+    formData: TFormData,
     citySelects: TParsedSelectors | [],
     carSelects: TParsedSelectors | [],
     statusSelects: TParsedSelectors | []
@@ -91,6 +92,13 @@ type TParsedSelectors = {
     id: string
 }[]
 
+interface IFormDataItem {
+    name: string,
+    value: string
+}
+
+type TFormData = IFormDataItem[] | []
+
 export type {
     TOrderList,
     IOrderState,
@@ -100,5 +108,6 @@ export type {
     TCarsSelectors,
     TStatusSelectors,
     TParsedSelectors,
-    TFilterData
+    TFilterData,
+    TFormData
 }
