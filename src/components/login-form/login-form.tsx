@@ -1,16 +1,18 @@
 import { Formik } from "formik"
-import React, { useEffect } from "react"
+import React from "react"
 import * as yup from 'yup'
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router"
 
 import { ILoginFormValues, ILoginInputProps } from "./types"
+import { Fieldset, Legend, ButtonWrapper, AccessButton, ErrorMessage } from "./styles"
 import { RootState } from '../../store/store'
+import { authorize } from "../../store/slices/auth-slice/auth-slice"
+import { RoutePath } from "../../globals/const"
 
 import TextInput from "../text-input/text-input"
 import Button from "../button/button"
-import { authorize } from "../../store/slices/auth-slice/auth-slice"
-import { RoutePath } from "../../const"
+
 
 
 const EmailProps: ILoginInputProps = {
@@ -40,22 +42,14 @@ const LoginForm: React.FC = () => {
     const history = useHistory()
     const dispatch = useDispatch();
     const loadingErrorStatus = useSelector((state: RootState) => state.auth.loadingError)
-    const authorizationStatus = useSelector((state: RootState) => state.auth.authorized)
-
-    useEffect(() => {
-        // do nothing
-    }, [loadingErrorStatus, authorizationStatus])
 
     const initialValues: ILoginFormValues = {
         email: '',
         password: ''
     }
 
-    const submitHandler = () => {
-        dispatch(authorize())
-    }
-
-    const clickHandler = () => {
+    const submitHandler = async () => {
+        await dispatch(authorize())
         history.push(RoutePath.MAIN)
     }
 
@@ -67,8 +61,8 @@ const LoginForm: React.FC = () => {
             validationSchema={LoginSchema}
         >
             {({ values, errors, touched, handleChange, handleBlur, isValid, dirty }) => (
-                <fieldset className="login-form">
-                    <legend className="login-form__legend">Вход</legend>
+                <Fieldset>
+                    <Legend>Вход</Legend>
                     <TextInput
                         name={EmailProps.name}
                         type={EmailProps.type}
@@ -92,25 +86,18 @@ const LoginForm: React.FC = () => {
                         changeHandler={handleChange}
                         blurHandler={handleBlur}
                     />
-                    <div className="login-form__buttons-wrapper">
-                        <Button
-                            title='Запросить доступ'
-                            type="submit"
-                            addClasses="login-form__access-button"
-                            isDisabled={authorizationStatus}
-                            clickHandler={() => submitHandler()}
-                        />
+                    <ButtonWrapper>
+                        <AccessButton type="button">Запросить доступ</AccessButton>
 
                         <Button
                             title='Войти'
                             type='button'
-                            addClasses='login-form__submit-button'
-                            isDisabled={!isValid || !dirty || !authorizationStatus}
-                            clickHandler={() => clickHandler()}
+                            isDisabled={!isValid || !dirty}
+                            clickHandler={() => submitHandler()}
                         />
-                    </div>
-                    {loadingErrorStatus && <p className="login-form__error">Ошибка авторизации</p>}
-                </fieldset>
+                    </ButtonWrapper>
+                    {loadingErrorStatus && <ErrorMessage>Ошибка авторизации</ErrorMessage>}
+                </Fieldset>
             )}
         </Formik>
     )

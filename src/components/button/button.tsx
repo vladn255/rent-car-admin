@@ -1,15 +1,16 @@
 import React from "react"
 
+import StyledButton from "./styles"
 import { IButtonProps } from "./types"
 
-const Button: React.FC<IButtonProps> = ({ title, type, addClasses = '', isDisabled = false, clickHandler }) => {
+const Button: React.FC<IButtonProps> = ({ className, title, type, isDisabled = false, clickHandler }) => {
     return (
-        <button
+        <StyledButton
+            className={className}
             type={type}
-            className={`${addClasses} button`}
             disabled={isDisabled}
             onClick={clickHandler}
-        >{title}</button>
+        >{title}</StyledButton>
     )
 }
 

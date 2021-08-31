@@ -1,19 +1,19 @@
 import React from "react"
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
-import { CssBaseline, ThemeProvider, Theme } from '@material-ui/core';
+import { ThemeProvider, Theme } from '@material-ui/core';
 
-import theme from '../../style-theme';
-import { RoutePath } from '../../const';
+import theme from '../../globals/style-theme';
+import { RoutePath } from '../../globals/const';
+import { StyledApp } from './styles';
 
 import LoginPage from "../login-page/login-page";
 import NotFound from '../not-found/not-found';
-import PrivateRoute from '../private-route/private-route';
+// import PrivateRoute from '../private-route/private-route';
 import MainPage from '../main-page/main-page';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <CssBaseline />
+    <StyledApp>
       <ThemeProvider<Theme> theme={theme}>
         <BrowserRouter>
           <Switch>
@@ -21,12 +21,17 @@ const App: React.FC = () => {
               <LoginPage />
             </Route>
 
-            <PrivateRoute exact
+            {/* Не забыть вернуть как было, когда главная будет готова */}
+            <Route exact path={RoutePath.MAIN}>
+              <MainPage />
+            </Route>
+
+            {/* <PrivateRoute exact
               path={RoutePath.MAIN}
               render={() => {
                 return <MainPage />
               }}>
-            </PrivateRoute>
+            </PrivateRoute> */}
 
             <Route>
               <NotFound />
@@ -36,7 +41,7 @@ const App: React.FC = () => {
 
         </BrowserRouter>
       </ThemeProvider>
-    </div>
+    </StyledApp>
   );
 }
 

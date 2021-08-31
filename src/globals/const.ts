@@ -8,7 +8,14 @@ const RoutePath = {
     MAIN: "/admin"
 }
 
+const SideBarItemsNames = {
+    CAR_CARD: "carCard",
+    CARS_LIST: "carsList",
+    ORDERS: "orders"
+}
+
 export {
     AuthCredentials,
-    RoutePath
+    RoutePath,
+    SideBarItemsNames
 }
