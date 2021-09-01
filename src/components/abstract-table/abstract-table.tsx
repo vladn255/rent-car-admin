@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { Divider } from '@material-ui/core'
-
-import { setCurrentFilters, setCurrentPage } from "../../store/slices/orders/orders-slice"
+import { useDispatch } from "react-redux";
+import { Divider, Typography, Paper } from '@material-ui/core'
 
 import SelectForm from '../select-form/select-form';
 import TableElement from '../table-element/table-element';
 import PaginationBar from '../pagination-bar/pagination-bar';
 
 import { TFilterData, ITableProps } from './types'
-import { useDispatch } from "react-redux";
+import { useStyles } from './styles'
 
 
 const AbstractTable: React.FC<ITableProps> = ({
+    name,
     isLoading,
     limit,
     querySelector,
@@ -19,8 +19,12 @@ const AbstractTable: React.FC<ITableProps> = ({
     dataCount,
     selectData,
     selectMap,
-    getTableCallback
+    getTableCallback,
+    setCurrentFilters,
+    setCurrentPage
 }) => {
+
+    const { typographyBody1, paperRoot } = useStyles();
 
     const dispatch = useDispatch()
 
@@ -47,16 +51,19 @@ const AbstractTable: React.FC<ITableProps> = ({
 
     return (
         <>
-            {isLoading
-                ? <h3>Данные загружаются</h3>
-                : <>
-                    <SelectForm submitCallback={getFilteredData} selectInputData={selectData} />
-                    <Divider />
-                    <TableElement dataList={dataList} getTable={getTableCallback} />
-                    <Divider />
-                    <PaginationBar count={pageCount} page={page} callback={setPageHandler} />
-                </>
-            }
+            <Typography classes={{ body1: typographyBody1 }}>{name}</Typography>
+            <Paper classes={{ root: paperRoot }}>
+                {isLoading
+                    ? <h3>Данные загружаются</h3>
+                    : <>
+                        <SelectForm submitCallback={getFilteredData} selectInputData={selectData} />
+                        <Divider />
+                        <TableElement dataList={dataList} getTable={getTableCallback} />
+                        <Divider />
+                        <PaginationBar count={pageCount} page={page} callback={setPageHandler} />
+                    </>
+                }
+            </Paper>
         </>
     );
 }

@@ -3,6 +3,7 @@ import { Divider, List, ListItem, ListItemIcon, ListItemText } from '@material-u
 import CreateIcon from '@material-ui/icons/Create';
 import ListIcon from '@material-ui/icons/List';
 import CommuteIcon from '@material-ui/icons/Commute';
+import CategoryIcon from '@material-ui/icons/Category';
 
 import { SideBarItemsNames } from '../../globals/const';
 import { useStyles } from './styles';
@@ -38,6 +39,12 @@ const SidebarItems = [
         name: SideBarItemsNames.ORDERS,
         text: "Заказы",
         icon: <ListIcon />,
+    },
+    {
+        index: 3,
+        name: SideBarItemsNames.CATEGORIES,
+        text: "Категории",
+        icon: <CategoryIcon />,
     },
 ]
 

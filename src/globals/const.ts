@@ -11,11 +11,15 @@ const RoutePath = {
 const SideBarItemsNames = {
     CAR_CARD: "carCard",
     CARS_LIST: "carsList",
-    ORDERS: "orders"
+    ORDERS: "orders",
+    CATEGORIES: "categories"
 }
+
+const TIME_FORMAT = 'DD.MM.YYYY HH:mm'
 
 export {
     AuthCredentials,
     RoutePath,
-    SideBarItemsNames
+    SideBarItemsNames,
+    TIME_FORMAT
 }

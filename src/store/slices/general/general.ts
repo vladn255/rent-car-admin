@@ -1,12 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { SideBarItemsNames } from "../../../globals/const";
 
 interface IGeneralState {
     selectedTab: string
 }
 
 const initialState: IGeneralState = {
-    selectedTab: SideBarItemsNames.ORDERS
+    selectedTab: ''
 }
 
 const generalSlice = createSlice({

@@ -1,5 +1,7 @@
 import { Typography, TableRow, TableCell, Checkbox, Box, FormControlLabel } from "@material-ui/core"
 
+import { parseDateToString } from "../../globals/utils";
+
 import EditButtonGroup from "../edit-button-group/edit-button-group";
 import ModelPhoto from "../model-photo/model-photo";
 
@@ -32,7 +34,7 @@ const OrderRow: React.FC<IOrder> = ({ orderData }) => {
                 </TableCell>
                 <TableCell>
                     <Typography classes={{ body1: textInfo }} variant="body1"><b className={textBlack}>{carId?.name}</b> в <b className={textBlack}>{cityId?.name}</b>, {pointId?.address}<br />
-                        {dateFrom} - {dateTo}<br />
+                        {parseDateToString(dateFrom)} - {parseDateToString(dateTo)}<br />
                         Цвет: <b className={textBlack}>{color}</b></Typography>
                 </TableCell>
                 <TableCell>

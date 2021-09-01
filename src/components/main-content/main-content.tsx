@@ -1,11 +1,13 @@
-import { Typography, Paper } from '@material-ui/core';
-
 import { useStyles } from './styles';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 
 import OrdersTable from '../order-table/order-table';
+import CarsTable from '../cars-table/cars-table';
+import CategoryTable from '../category-table/category-table'
+
 import { SideBarItemsNames } from '../../globals/const';
-import { useSelector } from 'react-redux';
+
 
 const setTable = (tabName: string) => {
     switch (tabName) {
@@ -14,24 +16,23 @@ const setTable = (tabName: string) => {
         case (SideBarItemsNames.CAR_CARD):
             return <h4>Ведутся работы...</h4>
         case (SideBarItemsNames.CARS_LIST):
-            return <h4>Ведутся работы...</h4>
+            return <CarsTable />
+        case (SideBarItemsNames.CATEGORIES):
+            return <CategoryTable />
 
         default:
-            return <OrdersTable />
+            return <></>
     }
 }
 
 const MainContent: React.FC = () => {
-    const { content, typographyBody1, paperRoot } = useStyles();
+    const { content } = useStyles();
 
     const activeTab = useSelector((state: RootState) => state.general.selectedTab)
 
     return (
         <main className={content}>
-            <Typography classes={{ body1: typographyBody1 }}>Заказы</Typography>
-            <Paper classes={{ root: paperRoot }}>
-                {setTable(activeTab)}
-            </Paper>
+            {setTable(activeTab)}
         </main>
     );
 }

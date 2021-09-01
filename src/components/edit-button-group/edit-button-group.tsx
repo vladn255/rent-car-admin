@@ -9,9 +9,9 @@ const EditButtonGroup: React.FC = () => {
 
     return (
         <ButtonGroup classes={{ root: groupRoot }} disableRipple={true}>
-            <Button classes={{ root: buttonRoot, iconSizeMedium:iconSizeMedium, startIcon: approveStartIcon }} startIcon={<Check />}>Готово</Button>
-            <Button classes={{ root: buttonRoot, iconSizeMedium:iconSizeMedium, startIcon: rejectStartIcon }} startIcon={<Clear />}>Отмена</Button>
-            <Button classes={{ root: buttonRoot, iconSizeMedium:iconSizeMedium, startIcon: editStartIcon }} startIcon={<MoreVert />}>Изменить</Button>
+            <Button classes={{ root: buttonRoot, iconSizeMedium: iconSizeMedium, startIcon: approveStartIcon }} startIcon={<Check />}>Готово</Button>
+            <Button classes={{ root: buttonRoot, iconSizeMedium: iconSizeMedium, startIcon: rejectStartIcon }} startIcon={<Clear />}>Отмена</Button>
+            <Button classes={{ root: buttonRoot, iconSizeMedium: iconSizeMedium, startIcon: editStartIcon }} startIcon={<MoreVert />}>Изменить</Button>
         </ButtonGroup>
     )
 }

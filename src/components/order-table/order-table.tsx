@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TableBody } from '@material-ui/core'
 
-import { getOrders, getCitySelects, getCarSelects, getStatusSelects } from "../../store/slices/orders/orders-slice"
+import { getOrders, getCitySelects, getCarSelects, getStatusSelects, setCurrentFilters, setCurrentPage } from "../../store/slices/orders/orders-slice"
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/store';
 
@@ -11,6 +11,7 @@ import AbstractTable from '../abstract-table/abstract-table'
 import { TOrderList } from '../../store/slices/orders/types';
 import { setSelectsOptions, getMappedSelects } from '../../globals/utils'
 
+const TABLE_NAME = 'Заказы'
 const LIMIT = 7
 const QUERY_SELECTOR = '[id]'
 
@@ -75,6 +76,7 @@ const OrdersTable: React.FC = () => {
 
     return (
         <AbstractTable
+            name={TABLE_NAME}
             isLoading={isLoading}
             querySelector={QUERY_SELECTOR}
             dataList={currentOrders}
@@ -83,6 +85,8 @@ const OrdersTable: React.FC = () => {
             selectData={ordersSelects}
             selectMap={selectMap}
             getTableCallback={getTableOrders}
+            setCurrentFilters={setCurrentFilters}
+            setCurrentPage={setCurrentPage}
         />
     );
 }

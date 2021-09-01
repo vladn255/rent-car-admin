@@ -10,7 +10,7 @@ const TableElement: React.FC<ITableElementProps> = ({ dataList, getTable }) => {
 
   return (
     <>
-      {dataList.length > 0
+      {dataList?.length > 0
         ? <TableContainer component={'div'}>
           <Table aria-label="orders table">
             {getTable(dataList)}

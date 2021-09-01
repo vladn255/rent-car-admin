@@ -37,8 +37,7 @@ const getStatusSelectors = (statusList: TStatusSelectors) => {
 }
 
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const fetchOrders = ({ page = 1, limit = 10, filters }: IUrlProps) => {
+const fetchOrders = ({ page = 1, limit = 10, filters }: IUrlProps): any => {
     const currentAccessToken = sessionStorage.getItem('access token')
     const api = createAPI(currentAccessToken)
 

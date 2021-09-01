@@ -21,6 +21,7 @@ interface ISelectData {
 type TSelectList = ISelectData[]
 
 interface ITableProps {
+    name: string,
     isLoading: boolean,
     limit: number,
     querySelector: string,
@@ -28,7 +29,9 @@ interface ITableProps {
     dataCount: number,
     selectData: TSelectList,
     selectMap: any,
-    getTableCallback: (datalist: any) => JSX.Element
+    getTableCallback: (datalist: any) => JSX.Element,
+    setCurrentFilters: (data: any) => any,
+    setCurrentPage: (data: any) => any,
 }
 
 export type { IFilterDataItem, TFilterData, TSelectOptions, TSelectList, ITableProps }
