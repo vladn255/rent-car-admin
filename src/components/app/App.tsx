@@ -8,7 +8,7 @@ import { StyledApp } from './styles';
 
 import LoginPage from "../login-page/login-page";
 import NotFound from '../not-found/not-found';
-// import PrivateRoute from '../private-route/private-route';
+import PrivateRoute from '../private-route/private-route';
 import MainPage from '../main-page/main-page';
 
 const App: React.FC = () => {
@@ -21,17 +21,12 @@ const App: React.FC = () => {
               <LoginPage />
             </Route>
 
-            {/* Не забыть вернуть как было, когда главная будет готова */}
-            <Route exact path={RoutePath.MAIN}>
-              <MainPage />
-            </Route>
-
-            {/* <PrivateRoute exact
+            <PrivateRoute exact
               path={RoutePath.MAIN}
               render={() => {
                 return <MainPage />
               }}>
-            </PrivateRoute> */}
+            </PrivateRoute>
 
             <Route>
               <NotFound />
