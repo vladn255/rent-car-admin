@@ -18,7 +18,6 @@ const CarRow: React.FC<ICategory> = ({ categoryData }) => {
                 <TableCell >
                     <TableCellInput value={description} />
                 </TableCell>
-
             </TableRow>
         </>
     )

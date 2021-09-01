@@ -13,7 +13,6 @@ const fetchCategories = ({ page = 1, limit = 10, filters }: IUrlProps): any => {
 
     return api.get(`/db/category${getEndpointUrl({ filters, page, limit })}`)
         .then((response: AxiosResponse<IResponse>) => {
-            console.log('category fetch worked', `/db/category${getEndpointUrl({ filters, page, limit })}`, response)
             return {
                 count: response.data.count,
                 data: response.data.data
