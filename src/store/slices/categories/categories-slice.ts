@@ -22,6 +22,7 @@ const getCategories = createAsyncThunk(
 const initialState: ICategoriesState = {
     categoriesCount: 0,
     categoriesList: [],
+    isLoading: true,
     loadingError: false,
 
     page: 1,
@@ -38,9 +39,13 @@ const categoriesSlice = createSlice({
         setCarsFormData(state, action: PayloadAction<TFormData>) { state.formData = action.payload },
     },
     extraReducers: (builder) => {
+        builder.addCase(getCategories.pending, (state) => {
+            state.isLoading = true
+        })
         builder.addCase(getCategories.fulfilled, (state, action) => {
             state.categoriesCount = action.payload.count
             state.categoriesList = action.payload.data
+            state.isLoading = false
         })
         builder.addCase(getCategories.rejected, (state) => {
             state.loadingError = true

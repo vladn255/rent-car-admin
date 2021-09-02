@@ -11,19 +11,17 @@ import {
 
 import { fetchCars, fetchCategories } from "./api-actions";
 
-const getCars = createAsyncThunk(
-    'cars/fetchCars',
-    async ({ page, limit, filters }: IUrlProps) => {
-        const response = await fetchCars({ page, limit, filters })
-        return (await response) as IResponse
-    }
-)
 
-const getCategorySelects = createAsyncThunk(
-    'cars/fetchCategories',
-    async () => {
-        const response = await fetchCategories()
-        return (await response) as TParsedSelectors
+const initCarsTable = createAsyncThunk(
+    'cars/initCarsTable',
+    async ({ page, limit, filters }: IUrlProps) => {
+        const [cars, categories]: [IResponse, TParsedSelectors] = await Promise.all([
+            (fetchCars({ page, limit, filters })),
+            (fetchCategories())
+        ])
+
+        const response = { cars, categories }
+        return response
     }
 )
 
@@ -31,6 +29,7 @@ const getCategorySelects = createAsyncThunk(
 const initialState: ICarsState = {
     carsCount: 0,
     carsList: [],
+    isLoading: true,
     loadingError: false,
 
     page: 1,
@@ -49,18 +48,16 @@ const carsSlice = createSlice({
         setCarsFormData(state, action: PayloadAction<TFormData>) { state.formData = action.payload },
     },
     extraReducers: (builder) => {
-        builder.addCase(getCars.fulfilled, (state, action) => {
-            state.carsCount = action.payload.count
-            state.carsList = action.payload.data
+        builder.addCase(initCarsTable.pending, (state) => {
+            state.isLoading = true
         })
-        builder.addCase(getCars.rejected, (state) => {
-            state.loadingError = true
+        builder.addCase(initCarsTable.fulfilled, (state, action) => {
+            state.carsCount = action.payload.cars.count
+            state.carsList = action.payload.cars.data
+            state.categorySelects = action.payload.categories
+            state.isLoading = false
         })
-
-        builder.addCase(getCategorySelects.fulfilled, (state, action) => {
-            state.categorySelects = action.payload
-        })
-        builder.addCase(getCategorySelects.rejected, (state) => {
+        builder.addCase(initCarsTable.rejected, (state) => {
             state.loadingError = true
         })
     }
@@ -68,4 +65,4 @@ const carsSlice = createSlice({
 
 export default carsSlice.reducer
 export const { setCurrentPage, setCurrentFilters, setCarsFormData } = carsSlice.actions
-export { getCars, getCategorySelects }
+export { initCarsTable }

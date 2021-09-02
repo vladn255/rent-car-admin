@@ -5,35 +5,18 @@ import { IOrderState, IResponse, TParsedSelectors, TFilterData, TFormData } from
 
 import { fetchOrders, fetchCities, fetchCars, fetchStatuses } from "./api-actions";
 
-const getOrders = createAsyncThunk(
-    'orders/fetchOrders',
+
+const initOrdersTable = createAsyncThunk(
+    'cars/initOrdersTable',
     async ({ page, limit, filters }: IUrlProps) => {
-        const response = await fetchOrders({ page, limit, filters })
-        return (await response) as IResponse
-    }
-)
-
-const getCitySelects = createAsyncThunk(
-    'orders/fetchCitySelects',
-    async () => {
-        const response = await fetchCities()
-        return (await response) as TParsedSelectors
-    }
-)
-
-const getCarSelects = createAsyncThunk(
-    'orders/fetchCarSelects',
-    async () => {
-        const response = await fetchCars()
-        return (await response) as TParsedSelectors
-    }
-)
-
-const getStatusSelects = createAsyncThunk(
-    'orders/fetchStatusSelects',
-    async () => {
-        const response = await fetchStatuses()
-        return (await response) as TParsedSelectors
+        const [orders, cities, cars, statuses]: [IResponse, TParsedSelectors, TParsedSelectors, TParsedSelectors] = await Promise.all([
+            (fetchOrders({ page, limit, filters })),
+            (fetchCities()),
+            (fetchCars()),
+            (fetchStatuses()),
+        ])
+        const response = { orders, cities, cars, statuses }
+        return response
     }
 )
 
@@ -41,7 +24,7 @@ const initialState: IOrderState = {
     ordersCount: 0,
     ordersList: [],
     loadingError: false,
-
+    isLoading: true,
     page: 1,
     filters: [],
     formData: [],
@@ -60,32 +43,18 @@ const ordersSlice = createSlice({
         setOrdersFormData(state, action: PayloadAction<TFormData>) { state.formData = action.payload },
     },
     extraReducers: (builder) => {
-        builder.addCase(getOrders.fulfilled, (state, action) => {
-            state.ordersCount = action.payload.count
-            state.ordersList = action.payload.data
+        builder.addCase(initOrdersTable.pending, (state) => {
+            state.isLoading = true
         })
-        builder.addCase(getOrders.rejected, (state) => {
-            state.loadingError = true
+        builder.addCase(initOrdersTable.fulfilled, (state, action) => {
+            state.ordersCount = action.payload.orders.count
+            state.ordersList = action.payload.orders.data
+            state.citySelects = action.payload.cities
+            state.carSelects = action.payload.cars
+            state.statusSelects = action.payload.statuses
+            state.isLoading = false
         })
-
-        builder.addCase(getCitySelects.fulfilled, (state, action) => {
-            state.citySelects = action.payload
-        })
-        builder.addCase(getCitySelects.rejected, (state) => {
-            state.loadingError = true
-        })
-
-        builder.addCase(getCarSelects.fulfilled, (state, action) => {
-            state.carSelects = action.payload
-        })
-        builder.addCase(getCarSelects.rejected, (state) => {
-            state.loadingError = true
-        })
-
-        builder.addCase(getStatusSelects.fulfilled, (state, action) => {
-            state.statusSelects = action.payload
-        })
-        builder.addCase(getStatusSelects.rejected, (state) => {
+        builder.addCase(initOrdersTable.rejected, (state) => {
             state.loadingError = true
         })
     }
@@ -93,4 +62,4 @@ const ordersSlice = createSlice({
 
 export default ordersSlice.reducer
 export const { setCurrentPage, setCurrentFilters, setOrdersFormData } = ordersSlice.actions
-export { getOrders, getCitySelects, getCarSelects, getStatusSelects }
+export { initOrdersTable }

@@ -1,6 +1,7 @@
 interface ICategoriesState {
     categoriesCount: number,
-    categoriesList: TCategoriesList | []
+    categoriesList: TCategoriesList | [],
+    isLoading: boolean,
     loadingError: boolean,
     page: number,
     filters: TFilterData,
