@@ -4,7 +4,7 @@ const AuthCredentials = {
 }
 
 const RoutePath = {
-    HOME: "/",
+    HOME: "/rent-car-admin",
     MAIN: "/admin"
 }
 
