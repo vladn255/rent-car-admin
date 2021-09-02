@@ -3,10 +3,10 @@ import React from "react"
 import { TextInputWrapper, TextInputInput, TextInputLabel, TextInputErrorMessage } from "./styles"
 import { ITextInputProps } from "./types";
 
-const TextInput: React.FC<ITextInputProps> = ({ name, type, label, placeholder, value = '', auotofocus = false, isError = false, errorText = '', changeHandler, blurHandler }: ITextInputProps) => {
+const TextInput: React.FC<ITextInputProps> = ({ name, type, className, label, placeholder, value = '', auotofocus = false, isError = false, errorText = '', changeHandler, blurHandler }: ITextInputProps) => {
 
     return (
-        <TextInputWrapper>
+        <TextInputWrapper className={className}>
             <TextInputLabel htmlFor={name}>{label}</TextInputLabel>
             <TextInputInput
                 isError={isError}

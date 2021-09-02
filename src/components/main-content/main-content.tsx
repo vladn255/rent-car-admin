@@ -5,6 +5,7 @@ import { RootState } from '../../store/store';
 import OrdersTable from '../order-table/order-table';
 import CarsTable from '../cars-table/cars-table';
 import CategoryTable from '../category-table/category-table'
+import CarCard from '../car-card/car-card'
 
 import { SideBarItemsNames } from '../../globals/const';
 
@@ -14,7 +15,7 @@ const setTable = (tabName: string) => {
         case (SideBarItemsNames.ORDERS):
             return <OrdersTable />
         case (SideBarItemsNames.CAR_CARD):
-            return <h4>Ведутся работы...</h4>
+            return <CarCard />
         case (SideBarItemsNames.CARS_LIST):
             return <CarsTable />
         case (SideBarItemsNames.CATEGORIES):

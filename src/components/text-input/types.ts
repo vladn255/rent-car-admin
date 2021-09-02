@@ -2,7 +2,9 @@ import React from "react";
 
 interface ITextInputProps {
     name: string,
+    id?: string,
     type: string,
+    className?: string,
     label: string,
     placeholder: string,
     value?: string,
@@ -10,8 +12,8 @@ interface ITextInputProps {
 
     isError?: string | boolean,
     errorText?: string,
-    changeHandler: (evt: React.ChangeEvent<HTMLInputElement>) => void,
-    blurHandler: (evt: React.FocusEvent<HTMLInputElement>) => void
+    changeHandler?: (evt: React.ChangeEvent<HTMLInputElement>) => void,
+    blurHandler?: (evt: React.FocusEvent<HTMLInputElement>) => void
 }
 
 type TInputProps = JSX.IntrinsicElements["input"]
