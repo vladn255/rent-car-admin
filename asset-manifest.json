@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.js": "/static/js/main.de5fd6bd.chunk.js",
-    "main.js.map": "/static/js/main.de5fd6bd.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.9482acdb.js",
-    "runtime-main.js.map": "/static/js/runtime-main.9482acdb.js.map",
-    "static/js/2.86027c26.chunk.js": "/static/js/2.86027c26.chunk.js",
-    "static/js/2.86027c26.chunk.js.map": "/static/js/2.86027c26.chunk.js.map",
-    "index.html": "/index.html",
-    "static/js/2.86027c26.chunk.js.LICENSE.txt": "/static/js/2.86027c26.chunk.js.LICENSE.txt",
-    "static/media/Roboto.59d18e16.woff": "/static/media/Roboto.59d18e16.woff",
-    "static/media/Roboto.806e04d8.woff2": "/static/media/Roboto.806e04d8.woff2",
-    "static/media/Robotobold.1e0c2267.woff": "/static/media/Robotobold.1e0c2267.woff",
-    "static/media/Robotobold.23c8ce07.woff2": "/static/media/Robotobold.23c8ce07.woff2",
-    "static/media/Robotolight.8c9edc30.woff": "/static/media/Robotolight.8c9edc30.woff",
-    "static/media/Robotolight.95ff440a.woff2": "/static/media/Robotolight.95ff440a.woff2",
-    "static/media/logo-Icon.42a15795.svg": "/static/media/logo-Icon.42a15795.svg"
+    "main.js": "/rent-car-admin/static/js/main.de5fd6bd.chunk.js",
+    "main.js.map": "/rent-car-admin/static/js/main.de5fd6bd.chunk.js.map",
+    "runtime-main.js": "/rent-car-admin/static/js/runtime-main.06c1fb2f.js",
+    "runtime-main.js.map": "/rent-car-admin/static/js/runtime-main.06c1fb2f.js.map",
+    "static/js/2.955e4693.chunk.js": "/rent-car-admin/static/js/2.955e4693.chunk.js",
+    "static/js/2.955e4693.chunk.js.map": "/rent-car-admin/static/js/2.955e4693.chunk.js.map",
+    "index.html": "/rent-car-admin/index.html",
+    "static/js/2.955e4693.chunk.js.LICENSE.txt": "/rent-car-admin/static/js/2.955e4693.chunk.js.LICENSE.txt",
+    "static/media/Roboto.59d18e16.woff": "/rent-car-admin/static/media/Roboto.59d18e16.woff",
+    "static/media/Roboto.806e04d8.woff2": "/rent-car-admin/static/media/Roboto.806e04d8.woff2",
+    "static/media/Robotobold.1e0c2267.woff": "/rent-car-admin/static/media/Robotobold.1e0c2267.woff",
+    "static/media/Robotobold.23c8ce07.woff2": "/rent-car-admin/static/media/Robotobold.23c8ce07.woff2",
+    "static/media/Robotolight.8c9edc30.woff": "/rent-car-admin/static/media/Robotolight.8c9edc30.woff",
+    "static/media/Robotolight.95ff440a.woff2": "/rent-car-admin/static/media/Robotolight.95ff440a.woff2",
+    "static/media/logo-Icon.42a15795.svg": "/rent-car-admin/static/media/logo-Icon.42a15795.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.9482acdb.js",
-    "static/js/2.86027c26.chunk.js",
+    "static/js/runtime-main.06c1fb2f.js",
+    "static/js/2.955e4693.chunk.js",
     "static/js/main.de5fd6bd.chunk.js"
   ]
 }
