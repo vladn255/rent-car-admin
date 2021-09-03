@@ -1,6 +1,7 @@
 interface IOrderState {
     ordersCount: number,
-    ordersList: TOrderList | []
+    ordersList: TOrderList | [],
+    isLoading: boolean,
     loadingError: boolean,
     page: number,
     filters: TFilterData,

@@ -1,6 +1,7 @@
 interface ICarsState {
     carsCount: number,
-    carsList: TCarsList | []
+    carsList: TCarsList | [],
+    isLoading: boolean,
     loadingError: boolean,
     page: number,
     filters: TFilterData,

@@ -4,12 +4,12 @@ import { useStyles } from "./styles";
 const FILE_NAME_SLICE = '/files';
 const URL_PART = 'https://api-factory.simbirsoft1.com';
 
-const checkIsValid = (src: string | undefined) => {
+const checkIsValid = (src?: string) => {
     let isValid = true;
 
-    if (typeof src !== 'string') {
+    if (!src) {
         isValid = false;
-    } else if (typeof src === 'string') {
+    } else if (src) {
         if (!(src.includes('jpg') || src.includes('jpeg') || src.includes('png'))) {
             isValid = false;
         }
@@ -18,8 +18,8 @@ const checkIsValid = (src: string | undefined) => {
     return isValid
 }
 
-const checkIsValidSrc = (src: string | undefined) => {
-    if (typeof src === 'string') {
+const checkIsValidSrc = (src?: string) => {
+    if (src) {
         return src.includes(FILE_NAME_SLICE)
             ? `${URL_PART}${src}`
             : src

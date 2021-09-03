@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { TableBody } from '@material-ui/core'
 
-import { getOrders, getCitySelects, getCarSelects, getStatusSelects, setCurrentFilters, setCurrentPage } from "../../store/slices/orders/orders-slice"
+import { initOrdersTable, setCurrentFilters, setCurrentPage } from "../../store/slices/orders/orders-slice"
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/store';
 
@@ -23,12 +23,12 @@ const OrdersTable: React.FC = () => {
     const filterData = useSelector((state: RootState) => state.orders.filters)
     const currentOrders = useSelector((state: RootState) => state.orders.ordersList)
     const ordersCount = useSelector((state: RootState) => state.orders.ordersCount)
+    const isLoading = useSelector((state: RootState) => state.orders.isLoading)
 
     const citySelects = useSelector((state: RootState) => state.orders.citySelects)
     const carSelects = useSelector((state: RootState) => state.orders.carSelects)
     const statusSelects = useSelector((state: RootState) => state.orders.statusSelects)
 
-    const [isLoading, setIsLoading] = useState(false)
 
     const ordersSelects = [
 
@@ -48,21 +48,8 @@ const OrdersTable: React.FC = () => {
 
     const selectMap = getMappedSelects(citySelects, carSelects, statusSelects)
 
-    const initOrders = async () => {
-        setIsLoading(true)
-
-        await Promise.all([
-            (async () => await dispatch(getOrders({ page: page, limit: LIMIT, filters: filterData })))(),
-            (async () => await dispatch(getCitySelects()))(),
-            (async () => await dispatch(getCarSelects()))(),
-            (async () => await dispatch(getStatusSelects()))(),
-        ])
-
-        setIsLoading(false)
-    }
-
     useEffect(() => {
-        initOrders()
+        dispatch(initOrdersTable({ page, limit: LIMIT, filters: filterData }))
     }, [page, filterData])
 
 

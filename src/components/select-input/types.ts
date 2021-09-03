@@ -7,7 +7,7 @@ type TOptionsList = TOption[]
 
 interface ISelectInput {
     name: string,
-    value: string | undefined,
+    value?: string,
     options: TOptionsList,
     callback: (name: string, value: string) => void
 }

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { TableBody, TableHead, TableRow, TableCell } from '@material-ui/core'
 
-import { getCars, getCategorySelects, setCurrentFilters, setCurrentPage } from "../../store/slices/cars/cars-slice"
+import { initCarsTable, setCurrentFilters, setCurrentPage } from "../../store/slices/cars/cars-slice"
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store/store';
 
@@ -24,13 +24,11 @@ const carsTable: React.FC = () => {
     const filterData = useSelector((state: RootState) => state.cars.filters)
     const currentCars = useSelector((state: RootState) => state.cars.carsList)
     const carsCount = useSelector((state: RootState) => state.cars.carsCount)
-
     const categorySelects = useSelector((state: RootState) => state.cars.categorySelects)
+    const isLoading = useSelector((state: RootState) => state.cars.isLoading)
 
-    const [isLoading, setIsLoading] = useState(false)
 
     const carsSelects = [
-
         {
             name: 'categoryId',
             options: setSelectsOptions(categorySelects, 'Все категории')
@@ -39,19 +37,8 @@ const carsTable: React.FC = () => {
 
     const selectMap = getMappedSelects(categorySelects)
 
-    const initСars = async () => {
-        setIsLoading(true)
-
-        await Promise.all([
-            (async () => await dispatch(getCars({ page: page, limit: LIMIT, filters: filterData })))(),
-            (async () => await dispatch(getCategorySelects()))(),
-        ])
-
-        setIsLoading(false)
-    }
-
     useEffect(() => {
-        initСars()
+        dispatch(initCarsTable({ page, limit: LIMIT, filters: filterData }))
     }, [page, filterData])
 
 

@@ -20,8 +20,11 @@ const setSelectsOptions = (options: TSelectOptions, resetText: string): any => {
 
 const getMappedSelects = (...selects: TSelectOptions[]): any => {
     const mappedSelects = new Map()
-    selects.slice().map((selectsItem) => selectsItem.slice().map(({ value, id }) => mappedSelects.set(value, id)))
-    return mappedSelects
+    console.log('utils', selects)
+    if (selects) {
+        selects.slice().map((selectsItem) => selectsItem.slice().map(({ value, id }) => mappedSelects.set(value, id)))
+        return mappedSelects
+    }
 }
 
 const parseDateToString = (dateNumber: number | undefined): string => {

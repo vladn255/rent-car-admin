@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { TableBody, TableHead, TableRow, TableCell } from '@material-ui/core'
 
 import { getCategories, setCurrentFilters, setCurrentPage } from "../../store/slices/categories/categories-slice"
@@ -23,22 +23,11 @@ const CategoriesTable: React.FC = () => {
     const filterData = useSelector((state: RootState) => state.categories.filters)
     const currentCategories = useSelector((state: RootState) => state.categories.categoriesList)
     const categoriesCount = useSelector((state: RootState) => state.categories.categoriesCount)
+    const isLoading = useSelector((state: RootState) => state.categories.isLoading)
 
-
-    const [isLoading, setIsLoading] = useState(false)
-
-    const initСars = async () => {
-        setIsLoading(true)
-
-        await Promise.all([
-            (async () => await dispatch(getCategories({ page: page, limit: LIMIT, filters: filterData })))(),
-        ])
-
-        setIsLoading(false)
-    }
 
     useEffect(() => {
-        initСars()
+        dispatch(getCategories({ page, limit: LIMIT, filters: filterData }))
     }, [page, filterData])
 
 
