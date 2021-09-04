@@ -2,11 +2,13 @@ interface ICarsState {
     carsCount: number,
     carsList: TCarsList | [],
     isLoading: boolean,
+    isLoadingSuccessful: boolean,
     loadingError: boolean,
     page: number,
     filters: TFilterData,
     formData: TFormData,
-    categorySelects: TParsedSelectors | []
+    categorySelects: TCategorySelectors | [],
+    activeCard: ICarsResponseProps | null
 }
 
 interface ICarsResponseProps {
@@ -22,9 +24,9 @@ interface ICarsResponseProps {
     },
     description: string,
     categoryId?: {
-        name: string,
-        description: string,
-        id: string
+        name?: string,
+        description?: string,
+        id?: string
     },
     colors?: string[],
     tank: number,
@@ -73,5 +75,6 @@ export type {
     TParsedSelectors,
     TCarsList,
     TFilterData,
-    TFormData
+    TFormData,
+    ICarsResponseProps
 }

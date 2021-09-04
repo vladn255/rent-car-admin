@@ -1,5 +1,5 @@
-interface ICarProps {
-    id: string,
+interface ICarCardState {
+    id: string | null,
     priceMax: number,
     priceMin: number,
     name: string,
@@ -16,13 +16,9 @@ interface ICarProps {
         id?: string
     },
     colors?: string[],
-    tank: number,
+    tank?: number,
     number: string
 }
 
-interface ICar {
-    carData: ICarProps,
-    handleDeleteClick: (id: string) => void
-}
 
-export type { ICarProps, ICar }
+export type { ICarCardState }

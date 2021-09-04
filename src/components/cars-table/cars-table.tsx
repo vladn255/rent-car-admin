@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { TableBody, TableHead, TableRow, TableCell } from '@material-ui/core'
 
 import { initCarsTable, setCurrentFilters, setCurrentPage } from "../../store/slices/cars/cars-slice"
@@ -9,6 +9,7 @@ import CarRow from '../car-row/car-row';
 import AbstractTable from '../abstract-table/abstract-table'
 
 import { TCarsList } from '../../store/slices/cars/types';
+import { deleteCarData } from "../../store/slices/cars/cars-slice";
 import { setSelectsOptions, getMappedSelects } from '../../globals/utils'
 
 
@@ -27,19 +28,42 @@ const carsTable: React.FC = () => {
     const categorySelects = useSelector((state: RootState) => state.cars.categorySelects)
     const isLoading = useSelector((state: RootState) => state.cars.isLoading)
 
+    const [updateStatus, setUpdateStatus] = useState(false)
 
     const carsSelects = [
         {
             name: 'categoryId',
-            options: setSelectsOptions(categorySelects, 'Все категории')
+            options: setSelectsOptions(categorySelects.map((category) => {
+                return {
+                    id: category.id,
+                    value: category.name,
+                    text: category.name
+                }
+            }), 'Все категории')
         },
     ]
 
-    const selectMap = getMappedSelects(categorySelects)
+    const selectMap = getMappedSelects(categorySelects.map((category) => {
+        return {
+            id: category.id,
+            value: category.name,
+            text: category.name
+        }
+    }))
+
 
     useEffect(() => {
         dispatch(initCarsTable({ page, limit: LIMIT, filters: filterData }))
-    }, [page, filterData])
+        console.log('effect', currentCars, updateStatus)
+    }, [page, filterData, updateStatus])
+
+    const handleDeleteClick = (id: string) => {
+        (async () => {
+            await dispatch(deleteCarData(id))
+            await dispatch(initCarsTable({ page, limit: LIMIT, filters: filterData }))
+            setUpdateStatus(!updateStatus)
+        })()
+    }
 
 
     const getTableCars = (cars: TCarsList) => {
@@ -57,7 +81,7 @@ const carsTable: React.FC = () => {
             </TableHead>
             <TableBody>
                 {cars.map((car) => {
-                    return <CarRow key={car.id} carData={car} />
+                    return <CarRow key={car.id} carData={car} handleDeleteClick={handleDeleteClick} />
                 })}
             </TableBody>
         </>

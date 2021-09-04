@@ -6,11 +6,11 @@ interface IFilterDataItem {
 type TFilterData = IFilterDataItem[] | []
 
 interface ISelectOption {
-    value: string,
+    name: string,
     text: string,
     id: string
 }
 
 type TSelectOptions = ISelectOption[]
 
-export type {IFilterDataItem, TFilterData, TSelectOptions}
+export type { IFilterDataItem, TFilterData, TSelectOptions }

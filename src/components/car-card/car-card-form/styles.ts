@@ -9,6 +9,30 @@ const StyledTextInput = styled(TextInput)`
     max-width: 320px;
 `
 
+const StyledNameInput = styled(StyledTextInput)`
+    grid-area: name
+`
+
+const StyledCategoryInput = styled(StyledTextInput)`
+    grid-area: category
+`
+
+const StyledNumberInput = styled(StyledTextInput)`
+    grid-area: number
+`
+
+const StyledPriceMinInput = styled(StyledTextInput)`
+    grid-area: priceMin
+`
+
+const StyledPriceMaxInput = styled(StyledTextInput)`
+    grid-area: priceMax
+`
+
+const StyledTankInput = styled(StyledTextInput)`
+    grid-area: tank
+`
+
 const StyledColorTextInput = styled(TextInput)`
     max-width: 283px;
     flex-grow: 1;
@@ -20,12 +44,16 @@ const FormGridContainer = styled.div`
     display: grid;
     grid-template-areas: 
     "name category"
+    "number ."
+    "priceMin priceMax"
+    "tank ."
     "colors ."
     "colors-boxes .";
     column-gap: 21px;
 `
 
 const ColorsWrapper = styled.div`
+    grid-area: colors;
     display: flex;
     width: 100%;
     justify-content: stretch;
@@ -81,6 +109,13 @@ const CancelButton = styled(Button)`
     background-color: ${Colors.DISABLED_GREY};
     border-color: ${Colors.DISABLED_GREY};
     color: ${Colors.FONT_BLACK};
+    margin-left: 8px;
+`
+
+const CreateButton = styled(Button)`
+    background-color: ${Colors.ICON_GREEN};
+    border-color: ${Colors.ICON_GREEN};
+    color: ${Colors.FONT_WHITE};
     margin-left: 8px;
 `
 
@@ -165,4 +200,20 @@ const useStyles = makeStyles(() =>
     }),
 );
 
-export { useStyles, StyledTextInput, StyledColorTextInput, FormGridContainer, ColorsWrapper, ColorsCheckboxes, AddColorButton, CancelButton, DeleteButton }
+export {
+    useStyles,
+    StyledNameInput,
+    StyledCategoryInput,
+    StyledNumberInput,
+    StyledPriceMinInput,
+    StyledPriceMaxInput,
+    StyledTankInput,
+    StyledColorTextInput,
+    FormGridContainer,
+    ColorsWrapper,
+    ColorsCheckboxes,
+    AddColorButton,
+    CancelButton,
+    CreateButton,
+    DeleteButton
+}

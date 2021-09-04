@@ -2,7 +2,6 @@ import { Typography, TableRow, TableCell, Checkbox, Box, FormControlLabel } from
 
 import { parseDateToString } from "../../globals/utils";
 
-import EditButtonGroup from "../edit-button-group/edit-button-group";
 import ModelPhoto from "../model-photo/model-photo";
 
 import { useStyles, GlobalCss } from "./styles";
@@ -21,8 +20,7 @@ const OrderRow: React.FC<IOrder> = ({ orderData }) => {
         checkboxRoot,
         icon,
         checkedIcon,
-        priceTypography,
-        buttonGroupBoxRoot
+        priceTypography
     } = useStyles()
 
     return (
@@ -62,11 +60,7 @@ const OrderRow: React.FC<IOrder> = ({ orderData }) => {
                 <TableCell align={'center'}>
                     <Typography classes={{ body1: priceTypography }}>{price}&nbsp;₽</Typography>
                 </TableCell>
-                <TableCell>
-                    <Box className={buttonGroupBoxRoot}>
-                        <EditButtonGroup />
-                    </Box>
-                </TableCell>
+
             </TableRow>
         </>
     )

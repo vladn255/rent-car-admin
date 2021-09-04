@@ -1,20 +1,30 @@
+import React, { useRef, useState } from "react"
 import { Typography, Paper, FormControlLabel, Checkbox } from "@material-ui/core"
 
 import Button from '../../button/button'
 
+import { ICarFormProps } from './types'
 import {
     useStyles,
-    StyledTextInput,
+    StyledNameInput,
+    StyledCategoryInput,
+    StyledNumberInput,
+    StyledPriceMinInput,
+    StyledPriceMaxInput,
+    StyledTankInput,
     StyledColorTextInput,
     FormGridContainer,
     ColorsWrapper,
     ColorsCheckboxes,
     AddColorButton,
     CancelButton,
+    CreateButton,
     DeleteButton
 } from './styles'
 
-const CarCardForm: React.FC = () => {
+const PRICE_STEP = 1000
+
+const CarCardForm: React.FC<ICarFormProps> = ({ carFormData, categories, isDelete, getFormData, handleCreateNewClick, handleSaveClick, handleCancelClick, handleDeleteClick }) => {
     const {
         typographyH4,
         boxDivider,
@@ -28,31 +38,153 @@ const CarCardForm: React.FC = () => {
         formLabelRoot
     } = useStyles()
 
+
+    const colorRef = useRef<HTMLInputElement>(null)
+    const [currentForm, setCurrentForm] = useState(carFormData)
+    const [currentColors, setCurrentColors] = useState(carFormData.colors)
+    const [categoriesList, setCategoriesList] = useState(categories)
+    const [colorValue, setColorValue] = useState('')
+    const [activeColors, setActiveColors] = useState(new Set(carFormData.colors))
+
+
+    const setPassedFormData = () => {
+        setCurrentForm(carFormData)
+        setCurrentColors(carFormData.colors)
+    }
+
+    const isColorActive = (color: string) => activeColors.has(color)
+
+    const handleTextInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+        evt.preventDefault()
+        const newFormData: any = { ...currentForm }
+        newFormData[evt.target.name] = evt.target.value
+        setCurrentForm(newFormData)
+        getFormData(newFormData)
+    }
+
+    const handleCategoryInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+        evt.preventDefault()
+        const targetCategoryId = categoriesList.find((category) => category.name === evt.target.value)
+        const newFormData: any = { ...currentForm }
+        if (targetCategoryId) {
+            newFormData.categoryId = targetCategoryId
+            setCurrentForm(newFormData)
+            getFormData(newFormData)
+        } else {
+            newFormData.categoryId = null
+            setCurrentForm(newFormData)
+            getFormData(newFormData)
+        }
+    }
+
+    const handleActiveColorChange = (name: string) => {
+        const newActiveColors = new Set(activeColors)
+        newActiveColors?.has(name)
+            ? newActiveColors.delete(name)
+            : newActiveColors.add(name)
+        setActiveColors(newActiveColors)
+
+        const colorsArray = Array.from(newActiveColors)
+        const newFormData = Object.assign(currentForm, { colors: colorsArray })
+        setCurrentForm(newFormData)
+        getFormData(newFormData)
+    }
+
+    const handleColorChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+        evt.preventDefault()
+        if (colorRef.current?.value) {
+            setColorValue(colorRef.current.value)
+        }
+    }
+
+    const handleColorInputClick = (evt: React.SyntheticEvent) => {
+        evt.preventDefault()
+        if (currentColors && colorRef.current?.value) {
+            const newColors = [
+                ...currentColors,
+                colorRef.current.value
+            ]
+            setCurrentColors(newColors)
+            setColorValue('')
+        } else if (!currentColors && colorRef.current?.value) {
+            const newColors = [
+                colorRef.current.value
+            ]
+            setCurrentColors(newColors)
+            setColorValue('')
+        }
+    }
+
+    if (currentForm !== carFormData || categoriesList !== categories) {
+        setCurrentForm(carFormData)
+        setCategoriesList(categories)
+    }
+
+
     return (
         <Paper classes={{ root: paperForm }}>
             <Typography variant="h4" classes={{ h4: typographyH4 }}>Настройки автомобиля</Typography>
             <FormGridContainer>
-                <StyledTextInput
+                <StyledNameInput
                     name={'name'}
                     id={'name'}
                     type={'text'}
                     label={'Модель автомобиля'}
                     placeholder={'Введите марку автомобиля'}
-                    value={''}
+                    value={currentForm.name}
+                    changeHandler={handleTextInputChange}
                 />
-                <StyledTextInput
+                <StyledCategoryInput
                     name={'category'}
                     id={'category'}
-                    type={'text'}
+                    type={''}
+                    list={'category-list'}
                     label={'Тип автомобиля'}
                     placeholder={'Введите тип автомобиля'}
-                    value={''}
+                    value={currentForm.categoryId?.name}
+                    changeHandler={handleCategoryInputChange}
                 />
-                <datalist id={'category'}>
-                    <option value={1} />
-                    <option value={2} />
-                    <option value={3} />
+                <datalist id={'category-list'}>
+                    {categoriesList.map((category, id) => <option key={id} value={category.name} />)}
                 </datalist>
+                <StyledNumberInput
+                    name={'number'}
+                    id={'number'}
+                    type={'text'}
+                    label={'Номер автомобиля'}
+                    placeholder={'Введите номер автомобиля'}
+                    value={currentForm.number}
+                    changeHandler={handleTextInputChange}
+                />
+                <StyledPriceMinInput
+                    name={'priceMin'}
+                    id={'priceMin'}
+                    type={'number'}
+                    step={PRICE_STEP}
+                    label={'Минимальная цена'}
+                    placeholder={'Введите минимальную цену'}
+                    value={`${currentForm.priceMin}`}
+                    changeHandler={handleTextInputChange}
+                />
+                <StyledPriceMaxInput
+                    name={'priceMax'}
+                    id={'priceMax'}
+                    type={'number'}
+                    step={PRICE_STEP}
+                    label={'Максимальная цена'}
+                    placeholder={'Введите максимальную цену'}
+                    value={currentForm.priceMax}
+                    changeHandler={handleTextInputChange}
+                />
+                <StyledTankInput
+                    name={'tank'}
+                    id={'tank'}
+                    type={'number'}
+                    label={'Топливо в баке'}
+                    placeholder={'Введите объем топлива в баке'}
+                    value={currentForm.tank}
+                    changeHandler={handleTextInputChange}
+                />
                 <ColorsWrapper>
                     <StyledColorTextInput
                         name={'colors'}
@@ -60,23 +192,26 @@ const CarCardForm: React.FC = () => {
                         type={'text'}
                         label={'Доступные цвета'}
                         placeholder={'Введите новый цвет'}
-                        value={''}
+                        ref={colorRef}
+                        value={colorValue}
+                        changeHandler={handleColorChange}
                     />
-                    <AddColorButton aria-label={'добавить цвет'} />
+                    <AddColorButton aria-label={'добавить цвет'} onClick={handleColorInputClick} />
                 </ColorsWrapper>
                 <ColorsCheckboxes>
-                    <FormControlLabel classes={{ root: formLabelRoot, label: labelTypography }} checked={true}
-                        control={<Checkbox checked={true} name={'name1'} classes={{ root: checkboxRoot }}
+                    {currentColors?.map((color, id) => <FormControlLabel
+                        key={id}
+                        classes={{ root: formLabelRoot, label: labelTypography }}
+                        checked={isColorActive(color)}
+                        onChange={(evt) => {
+                            evt.preventDefault()
+                            handleActiveColorChange(color)
+                        }}
+                        control={<Checkbox checked={isColorActive(color)} name={color} classes={{ root: checkboxRoot }}
                             checkedIcon={<span className={`${icon} ${checkedIcon}`} />}
                             icon={<span className={icon} />} />}
-                        label={'label1'}
-                    />
-                    <FormControlLabel classes={{ root: formLabelRoot, label: labelTypography }} checked={true}
-                        control={<Checkbox checked={true} name={'name2'} classes={{ root: checkboxRoot }}
-                            checkedIcon={<span className={`${icon} ${checkedIcon}`} />}
-                            icon={<span className={icon} />} />}
-                        label={'label2'}
-                    />
+                        label={color}
+                    />)}
                 </ColorsCheckboxes>
             </FormGridContainer>
 
@@ -84,10 +219,17 @@ const CarCardForm: React.FC = () => {
 
             <div className={buttonsBox}>
                 <div className={buttonsWrapperBox}>
-                    <Button title={'Сохранить'} type={'button'} />
-                    <CancelButton title={'Отменить'} type={'button'} />
+                    <Button title={'Сохранить'} type={'button'} clickHandler={handleSaveClick} />
+                    <CancelButton title={'Отменить'} type={'button'} clickHandler={() => {
+                        handleCancelClick()
+                        setPassedFormData()
+                    }} />
+                    <CreateButton title={'Создать новую карточку'} type={'button'} clickHandler={() => {
+                        handleCreateNewClick()
+                        setPassedFormData()
+                    }} />
                 </div>
-                <DeleteButton title={'Удалить'} type={'button'} />
+                <DeleteButton title={'Удалить'} type={'button'} isDisabled={!isDelete} clickHandler={handleDeleteClick} />
             </div>
         </Paper>
     )
