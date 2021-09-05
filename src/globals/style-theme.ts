@@ -1,5 +1,7 @@
 import { createTheme } from '@material-ui/core';
 
+import { BreakPoints } from '../styles/style-const'
+
 const theme = createTheme({
     palette: {
         text: {
@@ -8,11 +10,11 @@ const theme = createTheme({
     },
     breakpoints: {
         values: {
-            xs: 0,
-            sm: 320,
-            md: 768,
-            lg: 1024,
-            xl: 1440
+            xs: BreakPoints.xs,
+            sm: BreakPoints.sm,
+            md: BreakPoints.md,
+            lg: BreakPoints.lg,
+            xl: BreakPoints.xl
         }
     },
     props: {

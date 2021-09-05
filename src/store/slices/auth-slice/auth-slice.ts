@@ -38,6 +38,7 @@ const authSlice = createSlice({
             state.loading = 'idle'
             state.authorized = true
             state.accessToken = action.payload
+            sessionStorage.setItem('access token', action.payload)
         })
         builder.addCase(authorize.rejected, (state) => {
             state.loadingError = true

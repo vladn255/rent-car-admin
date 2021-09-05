@@ -8,10 +8,16 @@ interface ITextInputProps {
     value?: string,
     auotofocus?: boolean,
 
-    isError: string | false,
+    isError?: string | boolean,
     errorText?: string,
     changeHandler: (evt: React.ChangeEvent<HTMLInputElement>) => void,
     blurHandler: (evt: React.FocusEvent<HTMLInputElement>) => void
 }
 
-export default ITextInputProps
+type TInputProps = JSX.IntrinsicElements["input"]
+
+interface ICustomInputProps extends TInputProps {
+    isError: string | boolean
+}
+
+export type { ITextInputProps, ICustomInputProps }

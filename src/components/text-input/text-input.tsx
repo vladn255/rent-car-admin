@@ -1,14 +1,15 @@
 import React from "react"
 
-import ITextInputProps from "./types";
+import { TextInputWrapper, TextInputInput, TextInputLabel, TextInputErrorMessage } from "./styles"
+import { ITextInputProps } from "./types";
 
-const TextInput: React.FC<ITextInputProps> = ({ name, type, label, placeholder, value = '', auotofocus = false, isError = '', errorText = '', changeHandler, blurHandler }: ITextInputProps) => {
+const TextInput: React.FC<ITextInputProps> = ({ name, type, label, placeholder, value = '', auotofocus = false, isError = false, errorText = '', changeHandler, blurHandler }: ITextInputProps) => {
 
     return (
-        <div className="text-input">
-            <label className="text-input__label" htmlFor={name}>{label}</label>
-            <input
-                className={`text-input__input ${isError ? 'text-input__input--error' : ''}`}
+        <TextInputWrapper>
+            <TextInputLabel htmlFor={name}>{label}</TextInputLabel>
+            <TextInputInput
+                isError={isError}
                 type={type}
                 name={name}
                 id={name}
@@ -18,8 +19,8 @@ const TextInput: React.FC<ITextInputProps> = ({ name, type, label, placeholder, 
                 onChange={changeHandler}
                 onBlur={blurHandler}
             />
-            {isError && <span className="text-input__error-text">{errorText}</span>}
-        </div>
+            {isError && <TextInputErrorMessage>{errorText}</TextInputErrorMessage>}
+        </TextInputWrapper>
     )
 }
 

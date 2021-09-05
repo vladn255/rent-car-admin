@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios, { AxiosInstance, AxiosResponse } from "axios";
+
 
 const URL = `https://api-factory.simbirsoft1.com/api`;
 const REQUEST_TIMEOUT = 20000;
@@ -7,13 +8,14 @@ const RANDOM_STRING = 'u5taw48o'
 const SECRET = '4cbcea96de';
 const basicCode = btoa(`${RANDOM_STRING}:${SECRET}`);
 
-const getAuthorization = (accessToken: string | null = null): string => {
+const getAuthorization = (accessToken: string| null = null): string => {
     return accessToken
         ? `Bearer ${accessToken}`
         : `Basic ${basicCode}`
 }
 
-export const createAPI = (accessToken = null) => {
+
+export const createAPI = (accessToken: string | null = null): AxiosInstance => {
     const api = axios.create({
         headers: {
             'X-Api-Factory-Application-Id': APPLICATION_ID,
@@ -24,7 +26,7 @@ export const createAPI = (accessToken = null) => {
         timeout: REQUEST_TIMEOUT
     });
 
-    const onSuccess = (response: any) => response;
+    const onSuccess = (response: AxiosResponse) => response;
 
     const onFail = (err: string) => {
         throw err;
