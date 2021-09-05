@@ -22,8 +22,7 @@ const getCategories = createAsyncThunk(
 const initialState: ICategoriesState = {
     categoriesCount: 0,
     categoriesList: [],
-    isLoading: true,
-    loadingError: false,
+    isLoading: false,
 
     page: 1,
     filters: [],
@@ -37,6 +36,7 @@ const categoriesSlice = createSlice({
         setCurrentPage(state, action: PayloadAction<number>) { state.page = action.payload },
         setCurrentFilters(state, action: PayloadAction<TFilterData>) { state.filters = action.payload },
         setCarsFormData(state, action: PayloadAction<TFormData>) { state.formData = action.payload },
+        resetCategoriesError(state) { state.loadingError = undefined }
     },
     extraReducers: (builder) => {
         builder.addCase(getCategories.pending, (state) => {
@@ -47,12 +47,12 @@ const categoriesSlice = createSlice({
             state.categoriesList = action.payload.data
             state.isLoading = false
         })
-        builder.addCase(getCategories.rejected, (state) => {
-            state.loadingError = true
+        builder.addCase(getCategories.rejected, (state, action) => {
+            state.loadingError = action.error.message
         })
     }
 })
 
 export default categoriesSlice.reducer
-export const { setCurrentPage, setCurrentFilters, setCarsFormData } = categoriesSlice.actions
+export const { setCurrentPage, setCurrentFilters, setCarsFormData, resetCategoriesError } = categoriesSlice.actions
 export { getCategories }

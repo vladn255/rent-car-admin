@@ -54,7 +54,6 @@ const carsTable: React.FC = () => {
 
     useEffect(() => {
         dispatch(initCarsTable({ page, limit: LIMIT, filters: filterData }))
-        console.log('effect', currentCars, updateStatus)
     }, [page, filterData, updateStatus])
 
     const handleDeleteClick = (id: string) => {

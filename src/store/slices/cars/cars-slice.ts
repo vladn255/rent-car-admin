@@ -71,7 +71,6 @@ const initialState: ICarsState = {
     carsCount: 0,
     carsList: [],
     isLoading: false,
-    loadingError: false,
     isLoadingSuccessful: false,
 
     page: 1,
@@ -90,7 +89,8 @@ const carsSlice = createSlice({
         setCurrentPage(state, action: PayloadAction<number>) { state.page = action.payload },
         setCurrentFilters(state, action: PayloadAction<TFilterData>) { state.filters = action.payload },
         setCarsFormData(state, action: PayloadAction<TFormData>) { state.formData = action.payload },
-        resetActiveCard(state) { state.activeCard = null }
+        resetActiveCard(state) { state.activeCard = null },
+        resetCarsError(state) { state.loadingError = undefined }
     },
     extraReducers: (builder) => {
         // cars table initialization
@@ -103,8 +103,8 @@ const carsSlice = createSlice({
             state.categorySelects = action.payload.categories
             state.isLoading = false
         })
-        builder.addCase(initCarsTable.rejected, (state) => {
-            state.loadingError = true
+        builder.addCase(initCarsTable.rejected, (state, action) => {
+            state.loadingError = action.error.message
         })
 
         // get categories
@@ -115,8 +115,8 @@ const carsSlice = createSlice({
             state.categorySelects = action.payload
             state.isLoading = false
         })
-        builder.addCase(getCategories.rejected, (state) => {
-            state.loadingError = true
+        builder.addCase(getCategories.rejected, (state, action) => {
+            state.loadingError = action.error.message
         })
 
         // get car card
@@ -128,8 +128,8 @@ const carsSlice = createSlice({
             state.activeCard = action.payload
             state.isLoading = false
         })
-        builder.addCase(getCarCard.rejected, (state) => {
-            state.loadingError = true
+        builder.addCase(getCarCard.rejected, (state, action) => {
+            state.loadingError = action.error.message
         })
 
         // post car card
@@ -142,8 +142,8 @@ const carsSlice = createSlice({
             state.isLoading = false
             state.isLoadingSuccessful = true
         })
-        builder.addCase(postCarData.rejected, (state) => {
-            state.loadingError = true
+        builder.addCase(postCarData.rejected, (state, action) => {
+            state.loadingError = action.error.message
         })
 
         // put car card
@@ -156,8 +156,8 @@ const carsSlice = createSlice({
             state.isLoading = false
             state.isLoadingSuccessful = true
         })
-        builder.addCase(putCarData.rejected, (state) => {
-            state.loadingError = true
+        builder.addCase(putCarData.rejected, (state, action) => {
+            state.loadingError = action.error.message
         })
 
         // delete car card
@@ -168,12 +168,12 @@ const carsSlice = createSlice({
             state.activeCard = null
             state.isLoading = false
         })
-        builder.addCase(deleteCarData.rejected, (state) => {
-            state.loadingError = true
+        builder.addCase(deleteCarData.rejected, (state, action) => {
+            state.loadingError = action.error.message
         })
     }
 })
 
 export default carsSlice.reducer
-export const { setCurrentPage, setCurrentFilters, setCarsFormData, resetActiveCard } = carsSlice.actions
+export const { setCurrentPage, setCurrentFilters, setCarsFormData, resetActiveCard, resetCarsError } = carsSlice.actions
 export { initCarsTable, getCategories, getCarCard, postCarData, putCarData, deleteCarData }

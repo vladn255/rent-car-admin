@@ -31,7 +31,6 @@ const fetchCars = ({ page = 1, limit = 10, filters }: IUrlProps): any => {
                 data: response.data.data
             }
         })
-        .catch((err) => console.log(err))
 }
 
 const fetchCategories = (): any => {

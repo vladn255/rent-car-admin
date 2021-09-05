@@ -3,7 +3,7 @@ interface ICarsState {
     carsList: TCarsList | [],
     isLoading: boolean,
     isLoadingSuccessful: boolean,
-    loadingError: boolean,
+    loadingError?: string,
     page: number,
     filters: TFilterData,
     formData: TFormData,

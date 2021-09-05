@@ -2,7 +2,7 @@ interface IOrderState {
     ordersCount: number,
     ordersList: TOrderList | [],
     isLoading: boolean,
-    loadingError: boolean,
+    loadingError?: string,
     page: number,
     filters: TFilterData,
     formData: TFormData,
