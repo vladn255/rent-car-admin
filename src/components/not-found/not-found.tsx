@@ -1,7 +1,7 @@
-import {Link} from 'react-router-dom';
-import {RoutePath} from "../../const";
+import { Link } from 'react-router-dom';
+import { RoutePath } from "../../globals/const";
 
-const NotFound = () => {
+const NotFound: React.FC = () => {
   return (
     <div>
       <h1>404 NotFound</h1>

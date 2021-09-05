@@ -2,7 +2,7 @@ import React from "react"
 import { useSelector } from "react-redux";
 import { Route, Redirect } from 'react-router-dom';
 
-import { RoutePath } from '../../const';
+import { RoutePath } from '../../globals/const';
 
 import { RootState } from '../../store/store'
 import { IPrivateRoute } from './types'

@@ -1,11 +1,14 @@
-import { FormEvent, MouseEvent } from "react"
+import { FormEvent, MouseEvent, SyntheticEvent } from "react"
+
+type clickEvent = FormEvent<HTMLFormElement> | MouseEvent | SyntheticEvent
+type submitEvent = SyntheticEvent
 
 interface IButtonProps {
+    className?: string,
     title: string,
     type: "button" | "submit" | "reset" | undefined,
-    addClasses?: string,
     isDisabled?: boolean,
-    clickHandler?: (evt: FormEvent<HTMLFormElement> | MouseEvent) => void
+    clickHandler?: ((evt: clickEvent) => void) | ((evt: submitEvent) => void)
 }
 
-export type { IButtonProps }
+export type { IButtonProps, clickEvent, submitEvent }
