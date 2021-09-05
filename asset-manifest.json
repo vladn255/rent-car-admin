@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/rent-car-admin/static/js/main.35455624.chunk.js",
-    "main.js.map": "/rent-car-admin/static/js/main.35455624.chunk.js.map",
+    "main.js": "/rent-car-admin/static/js/main.b7fcfabc.chunk.js",
+    "main.js.map": "/rent-car-admin/static/js/main.b7fcfabc.chunk.js.map",
     "runtime-main.js": "/rent-car-admin/static/js/runtime-main.06c1fb2f.js",
     "runtime-main.js.map": "/rent-car-admin/static/js/runtime-main.06c1fb2f.js.map",
-    "static/js/2.e2645332.chunk.js": "/rent-car-admin/static/js/2.e2645332.chunk.js",
-    "static/js/2.e2645332.chunk.js.map": "/rent-car-admin/static/js/2.e2645332.chunk.js.map",
+    "static/js/2.f1f3bf44.chunk.js": "/rent-car-admin/static/js/2.f1f3bf44.chunk.js",
+    "static/js/2.f1f3bf44.chunk.js.map": "/rent-car-admin/static/js/2.f1f3bf44.chunk.js.map",
     "index.html": "/rent-car-admin/index.html",
-    "static/js/2.e2645332.chunk.js.LICENSE.txt": "/rent-car-admin/static/js/2.e2645332.chunk.js.LICENSE.txt",
+    "static/js/2.f1f3bf44.chunk.js.LICENSE.txt": "/rent-car-admin/static/js/2.f1f3bf44.chunk.js.LICENSE.txt",
     "static/media/Roboto.59d18e16.woff": "/rent-car-admin/static/media/Roboto.59d18e16.woff",
     "static/media/Roboto.806e04d8.woff2": "/rent-car-admin/static/media/Roboto.806e04d8.woff2",
     "static/media/Robotobold.1e0c2267.woff": "/rent-car-admin/static/media/Robotobold.1e0c2267.woff",
@@ -18,7 +18,7 @@
   },
   "entrypoints": [
     "static/js/runtime-main.06c1fb2f.js",
-    "static/js/2.e2645332.chunk.js",
-    "static/js/main.35455624.chunk.js"
+    "static/js/2.f1f3bf44.chunk.js",
+    "static/js/main.b7fcfabc.chunk.js"
   ]
 }
