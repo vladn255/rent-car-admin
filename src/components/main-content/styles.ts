@@ -8,6 +8,7 @@ const useStyles = makeStyles(() =>
             flexGrow: 1,
             marginTop: HEADER_BAR_HEIGHT,
             padding: `28px 27px 28px 27px`,
+            position: 'relative'
         },
     }),
 );

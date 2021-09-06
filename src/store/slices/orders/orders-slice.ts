@@ -23,7 +23,6 @@ const initOrdersTable = createAsyncThunk(
 const initialState: IOrderState = {
     ordersCount: 0,
     ordersList: [],
-    loadingError: false,
     isLoading: true,
     page: 1,
     filters: [],
@@ -41,6 +40,7 @@ const ordersSlice = createSlice({
         setCurrentPage(state, action: PayloadAction<number>) { state.page = action.payload },
         setCurrentFilters(state, action: PayloadAction<TFilterData>) { state.filters = action.payload },
         setOrdersFormData(state, action: PayloadAction<TFormData>) { state.formData = action.payload },
+        resetOrdersError(state) { state.loadingError = undefined }
     },
     extraReducers: (builder) => {
         builder.addCase(initOrdersTable.pending, (state) => {
@@ -54,12 +54,12 @@ const ordersSlice = createSlice({
             state.statusSelects = action.payload.statuses
             state.isLoading = false
         })
-        builder.addCase(initOrdersTable.rejected, (state) => {
-            state.loadingError = true
+        builder.addCase(initOrdersTable.rejected, (state, action) => {
+            state.loadingError = action.error.message
         })
     }
 })
 
 export default ordersSlice.reducer
-export const { setCurrentPage, setCurrentFilters, setOrdersFormData } = ordersSlice.actions
+export const { setCurrentPage, setCurrentFilters, setOrdersFormData, resetOrdersError } = ordersSlice.actions
 export { initOrdersTable }

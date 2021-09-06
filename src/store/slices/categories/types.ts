@@ -2,7 +2,7 @@ interface ICategoriesState {
     categoriesCount: number,
     categoriesList: TCategoriesList | [],
     isLoading: boolean,
-    loadingError: boolean,
+    loadingError?: string,
     page: number,
     filters: TFilterData,
     formData: TFormData,

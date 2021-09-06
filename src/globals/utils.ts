@@ -20,7 +20,6 @@ const setSelectsOptions = (options: TSelectOptions, resetText: string): any => {
 
 const getMappedSelects = (...selects: TSelectOptions[]): any => {
     const mappedSelects = new Map()
-    console.log('utils', selects)
     if (selects) {
         selects.slice().map((selectsItem) => selectsItem.slice().map(({ value, id }) => mappedSelects.set(value, id)))
         return mappedSelects
