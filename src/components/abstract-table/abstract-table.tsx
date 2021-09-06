@@ -35,7 +35,7 @@ const AbstractTable: React.FC<ITableProps> = ({
         dispatch(setCurrentPage(page))
     }
 
-    const pageCount = (Math.floor(dataCount / limit))
+    const pageCount = (Math.ceil(dataCount / limit))
 
     const getFilteredData = (data: TFilterData) => {
 

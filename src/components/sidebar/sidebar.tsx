@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Divider, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import CreateIcon from '@material-ui/icons/Create';
 import ListIcon from '@material-ui/icons/List';
@@ -52,17 +52,18 @@ const SidebarItems = [
 const Sidebar: React.FC = () => {
     const dispatch = useDispatch()
     const { root, toolbar, itemRoot, selected, iconRoot } = useStyles()
-    const [activeTab, setActiveTab] = useState(useSelector((state: RootState) => state.general.selectedTab))
+    const activeTab = useSelector((state: RootState) => state.general.selectedTab)
 
     const clickHandler = (evt: React.SyntheticEvent, index: number) => {
         evt.preventDefault()
         const selectedTab = SidebarItems.find((item) => item.index === index)
 
         if (typeof selectedTab === 'object') {
-            setActiveTab(selectedTab.name)
             dispatch(setSelectedTab(selectedTab.name))
         }
     }
+
+    useEffect(() => {/* does nothing, just need to re-render when activeTab changes */ }, [activeTab])
 
     return (
         <>

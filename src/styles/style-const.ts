@@ -13,6 +13,7 @@ const BreakPoints = {
 const Colors = {
     MAIN_BLUE: '#007bff',
     DISABLED_GREY: '#e9ecef',
+    DELETE_RED: '#CB3656',
     ERROR_RED: '#c4183c',
     ERROR_BORDER_RED: 'rgba(196, 24, 60, 0.1)',
     BORDER_GREY: '#BECAD6',

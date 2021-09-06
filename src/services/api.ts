@@ -28,7 +28,7 @@ export const createAPI = (accessToken: string | null = null): AxiosInstance => {
 
     const onSuccess = (response: AxiosResponse) => response;
 
-    const onFail = (err: string) => {
+    const onFail = (err: Error) => {
         throw err;
     };
 
